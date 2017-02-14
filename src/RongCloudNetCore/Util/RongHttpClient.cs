@@ -24,7 +24,7 @@ namespace RongCloudNetCore.Util
             return await ReturnResult(request);
         }
 
-        public static async Task<string> ExcutePost(string appkey, string appSecret, string methodUrl, string postStr, string contentType)
+        public static async Task<string> ExecutePost(string appkey, string appSecret, string methodUrl, string postStr, string contentType)
         {
             Random rd = new Random();
             string nonce = rd.Next().ToString();
