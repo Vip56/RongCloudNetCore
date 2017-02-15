@@ -1,14 +1,13 @@
-﻿using System;
+﻿using RongCloudNetCore.Methods;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RongCloudNetCore
 {
     public class RongCloud
     {
-        private static Dictionary<String, RongCloud> rongCloud = new Dictionary<String, RongCloud>();
-        public static String RONGCLOUDURI = "http://api.cn.ronghub.com";
+        private static Dictionary<string, RongCloud> rongCloud = new Dictionary<String, RongCloud>();
+        public static string RONGCLOUDURI = "http://api.cn.ronghub.com";
         public const string RONGCLOUDSMSURI = "http://api.sms.ronghub.com";
         //确保线程同步
         private static readonly object locker = new object();
@@ -21,7 +20,7 @@ namespace RongCloudNetCore
         public Push push;
         public SMS sms;
 
-        private RongCloud(String appKey, String appSecret)
+        private RongCloud(string appKey, string appSecret)
         {
             user = new User(appKey, appSecret);
             message = new Message(appKey, appSecret);
@@ -30,10 +29,9 @@ namespace RongCloudNetCore
             chatroom = new Chatroom(appKey, appSecret);
             push = new Push(appKey, appSecret);
             sms = new SMS(appKey, appSecret);
-
         }
 
-        public static RongCloud getInstance(String appKey, String appSecret)
+        public static RongCloud GetInstance(string appKey, string appSecret)
         {
             lock (locker)
             {
