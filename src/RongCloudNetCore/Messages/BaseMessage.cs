@@ -11,7 +11,8 @@ namespace RongCloudNetCore.Messages
         {
             JsonSerializerSettings jsetting = new JsonSerializerSettings();
             jsetting.NullValueHandling = NullValueHandling.Ignore;
-            return JsonConvert.SerializeObject(this);
+            jsetting.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+            return JsonConvert.SerializeObject(this, jsetting);
         }
     }
 }
