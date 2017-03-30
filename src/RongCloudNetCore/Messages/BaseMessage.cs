@@ -4,6 +4,7 @@ namespace RongCloudNetCore.Messages
 {
     public abstract class BaseMessage
     {
+        [JsonIgnore]
         public virtual string TYPE { get; }
 
         public override string ToString()
