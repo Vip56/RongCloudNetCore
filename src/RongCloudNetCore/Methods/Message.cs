@@ -72,8 +72,7 @@ namespace RongCloudNetCore.Methods
             if (templateMessage == null)
                 throw new ArgumentNullException(nameof(templateMessage));
 
-            string postStr = "";
-            postStr = JsonConvert.SerializeObject(templateMessage);
+            string postStr = templateMessage.ToString();
             return JsonConvert.DeserializeObject<CodeSuccessReslut>(await RongHttpClient.ExecutePost(appKey, appSecret, RongCloud.RONGCLOUDURI + "/message/private/publish_template.json", postStr, "application/json"));
         }
 
@@ -159,7 +158,7 @@ namespace RongCloudNetCore.Methods
                 throw new ArgumentNullException(nameof(templateMessage));
 
             string postStr = "";
-            postStr = JsonConvert.SerializeObject(templateMessage);
+            postStr = templateMessage.ToString();
             return JsonConvert.DeserializeObject<CodeSuccessReslut>(await RongHttpClient.ExecutePost(appKey, appSecret, RongCloud.RONGCLOUDURI + "/message/system/publish_template.json", postStr, "application/json"));
         }
 
