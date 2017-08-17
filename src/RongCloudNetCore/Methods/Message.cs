@@ -114,6 +114,42 @@ namespace RongCloudNetCore.Methods
         }
 
         /// <summary>
+        /// 发送系统消息方法（一个用户向一个或多个用户发送系统消息，单条消息最大 128k，会话类型为 SYSTEM。每秒钟最多发送 100 条消息，每次最多同时向 100 人发送，如：一次发送 100 人时，示为 100 条消息。） 
+        /// </summary>
+        /// <param name="fromUserId">发送人用户 Id。（必传）</param>
+        /// <param name="toUserId">接收用户 Id，提供多个本参数可以实现向多人发送消息，上限为 1000 人。（必传）</param>
+        /// <param name="message">发送消息内容（必传）</param>
+        /// <param name="pushContent">如果为自定义消息，定义显示的 Push 内容，内容中定义标识通过 values 中设置的标识位内容进行替换.如消息类型为自定义不需要 Push 通知，则对应数组传空值即可。（可选）</param>
+        /// <param name="pushData">针对 iOS 平台为 Push 通知时附加到 payload 中，Android 客户端收到推送消息时对应字段名为 pushData。如不需要 Push 功能对应数组传空值即可。（可选）</param>
+        /// <param name="isPersisted">当前版本有新的自定义消息，而老版本没有该自定义消息时，老版本客户端收到消息后是否进行存储，0 表示为不存储、 1 表示为存储，默认为 1 存储消息。（可选）</param>
+        /// <param name="isCounted">当前版本有新的自定义消息，而老版本没有该自定义消息时，老版本客户端收到消息后是否进行未读消息计数，0 表示为不计数、 1 表示为计数，默认为 1 计数，未读消息数增加 1。（可选）</param>
+        public async Task<CodeSuccessReslut> PublishSystem(string fromUserId, string[] toUserId, CmdMsgMessage message, String pushContent, String pushData, int isPersisted, int isCounted)
+        {
+            if (string.IsNullOrEmpty(fromUserId))
+                throw new ArgumentNullException(nameof(fromUserId));
+            if (toUserId == null)
+                throw new ArgumentNullException(nameof(toUserId));
+
+            string postStr = "";
+            postStr += "fromUserId=" + WebUtility.UrlEncode(fromUserId == null ? "" : fromUserId) + "&";
+            for (int i = 0; i < toUserId.Length; i++)
+            {
+                string child = toUserId[i];
+                postStr += "toUserId=" + WebUtility.UrlEncode(child) + "&";
+            }
+
+            postStr += "objectName=" + WebUtility.UrlEncode(message.TYPE) + "&";
+            postStr += "content=" + WebUtility.UrlEncode(message.ToString()) + "&";
+            postStr += "pushContent=" + WebUtility.UrlEncode(pushContent == null ? "" : pushContent) + "&";
+            postStr += "pushData=" + WebUtility.UrlEncode(pushData == null ? "" : pushData) + "&";
+            postStr += "isPersisted=" + WebUtility.UrlEncode(Convert.ToString(isPersisted) == null ? "" : Convert.ToString(isPersisted)) + "&";
+            postStr += "isCounted=" + WebUtility.UrlEncode(Convert.ToString(isCounted) == null ? "" : Convert.ToString(isCounted)) + "&";
+            postStr = postStr.Substring(0, postStr.LastIndexOf('&'));
+
+            return JsonConvert.DeserializeObject<CodeSuccessReslut>(await RongHttpClient.ExecutePost(appKey, appSecret, RongCloud.RONGCLOUDURI + "/message/system/publish.json", postStr, "application/x-www-form-urlencoded"));
+        }
+
+        /// <summary>
         /// 发送系统模板消息方法（一个用户向一个或多个用户发送系统消息，单条消息最大 128k，会话类型为 SYSTEM.每秒钟最多发送 100 条消息，每次最多同时向 100 人发送，如：一次发送 100 人时，示为 100 条消息。） 
         /// </summary>
         /// <param name="templateMessage">系统模版消息</param>
