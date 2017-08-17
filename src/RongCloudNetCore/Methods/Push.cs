@@ -26,8 +26,7 @@ namespace RongCloudNetCore.Methods
             if (userTag == null)
                 throw new ArgumentNullException(nameof(userTag));
 
-            string postStr = "";
-            postStr = JsonConvert.SerializeObject(userTag);
+            string postStr = userTag.ToString();
             return JsonConvert.DeserializeObject<CodeSuccessReslut>(await RongHttpClient.ExecutePost(appKey, appSecret, RongCloud.RONGCLOUDURI + "/user/tag/set.json", postStr, "application/json"));
         }
 
@@ -40,8 +39,7 @@ namespace RongCloudNetCore.Methods
             if (pushMessage == null)
                 throw new ArgumentNullException(nameof(pushMessage));
 
-            string postStr = "";
-            postStr = JsonConvert.SerializeObject(pushMessage);
+            string postStr = pushMessage.ToString();
             return JsonConvert.DeserializeObject<CodeSuccessReslut>(await RongHttpClient.ExecutePost(appKey, appSecret, RongCloud.RONGCLOUDURI + "/push.json", postStr, "application/json"));
         }
     }

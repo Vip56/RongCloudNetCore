@@ -6,7 +6,10 @@ namespace RongCloudNetCore.Models
     {
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            JsonSerializerSettings jsetting = new JsonSerializerSettings();
+            jsetting.NullValueHandling = NullValueHandling.Ignore;
+            jsetting.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+            return JsonConvert.SerializeObject(this, jsetting);
         }
     }
 }
