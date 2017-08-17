@@ -15,7 +15,7 @@
         {
             get
             {
-                return "RC:TxtMsg";
+                return "RC:CmdMsg";
             }
         }
 
