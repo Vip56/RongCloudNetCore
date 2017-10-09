@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>1.0.0-beta</VersionPrefix>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>RongCloudNetCore</AssemblyName>
+    <PackageId>RongCloudNetCore</PackageId>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/16951448?v=3&amp;s=70</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Vip56/RongCloudNetCore</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Vip56/RongCloudNetCore/blob/master/LICENSE</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Description>融云服务端SDK</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="System.Net.Requests" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

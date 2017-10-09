@@ -9,8 +9,8 @@ namespace RongCloudNetCore.UnitTest
 {
     public class Test
     {
-        public const string appKey = "82hegw5uhqtcx";
-        public const string appSecret = "FnngEX4S3aB";
+        public const string appKey = "";
+        public const string appSecret = "";
 
         private RongCloud _client;
 
@@ -71,5 +71,16 @@ namespace RongCloudNetCore.UnitTest
             var result = await _client.Message.PublishPrivate("userId1", messageUserIds, msg, "thisisapush", "exit", "4", 0, 0, 0);
             Assert.Equal(result.Code, 200);
         }
+
+
+        [Fact]
+        public async Task TestPublishSystemMessage()
+        {
+            string[] messageUserIds = { "userId2", "userid3", "userId4" };
+            CmdMsgMessage msg = new CmdMsgMessage("hello", "helloExtra");
+            var result = await _client.Message.PublishSystem("System", messageUserIds, msg, null, null, 0, 0);
+            Assert.Equal(result.Code, 200);
+        }
+
     }
 }
