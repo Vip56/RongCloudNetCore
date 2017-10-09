@@ -9,8 +9,8 @@ namespace RongCloudNetCore.UnitTest
 {
     public class Test
     {
-        public const string appKey = "82hegw5uhqtcx";
-        public const string appSecret = "FnngEX4S3aB";
+        public const string appKey = "";
+        public const string appSecret = "";
 
         private RongCloud _client;
 
